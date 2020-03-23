@@ -24,8 +24,8 @@ h1 {
   font-weight: 200;
   font-size: 70px;
   background: linear-gradient(
-  rgba(0,0,0, 0.5),
-  rgba(0,0,0, 0.5));
+  rgba(0,0,0, 0.7),
+  rgba(0,0,0, 0.7));
   text-align: center;
   width: 80%;
   margin: auto;
@@ -38,8 +38,8 @@ h2 {
   font-size: 30px;
   border-radius: 10px;
   background: linear-gradient(
-  rgba(0,0,0, 0.5),
-  rgba(0,0,0, 0.5));
+  rgba(0,0,0, 0.7),
+  rgba(0,0,0, 0.7));
   width: 80%;
   margin: auto;
   margin-top: 10px;
@@ -62,8 +62,8 @@ h2 {
   top: 0;
   left: 0;
   background: linear-gradient(
-  rgba(0,0,0, 0.3),
-  rgba(0,0,0, 0.3));
+  rgba(0,0,0, 0.1),
+  rgba(0,0,0, 0.1));
   height: 100%;
   width:100%;
   z-index: 100;
