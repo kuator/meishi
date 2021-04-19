@@ -59,22 +59,28 @@
     }
 
     setup() {
-      let radius = this.radius;
+      // let radius = this.radius;
       let spawn = {};
       let velocity = {};
       let randomVelocity = 1;
       let spawnCoordinates = [];
-      let horizontal = [0, 1,2,3,4,5,6,7,8,9];
-      let vertical = [0, 1,2,3,4,5,6,7,8,9];
+      let horizontal = Array.from(Array(this.number).keys());
+      let vertical = Array.from(Array(this.number).keys());
       shuffle(horizontal);
       shuffle(vertical);
       for(let i = 0; i<this.number; i++){
+        let cageHorizontalSize = canvas.width/this.number;
+        let cageVerticalSize = canvas.height/this.number ;
+        console.log(cageHorizontalSize);
+        console.log(cageVerticalSize);
+        console.log(this.radius);
+        this.radius = Math.min(cageHorizontalSize, cageVerticalSize)/2;
+        let radius = this.radius;
         let lowerHorizontalBoundary = radius;
         let upperHorizontalBoundary = canvas.width - radius;
         let upperVerticalBoundary = canvas.height - radius;
         let lowerVerticalBoundary = radius;
-        let cageHorizontalSize = canvas.width/this.number;
-        let cageVerticalSize = canvas.height/this.number ;
+        // debugger;
 
         spawn.x = Math.min(Math.max(Math.random()*this.radius + cageHorizontalSize*horizontal.pop() + radius, radius), upperHorizontalBoundary); 
         spawn.y = Math.min(Math.max(Math.random()*this.radius + cageVerticalSize*vertical.pop() + radius, radius), upperVerticalBoundary); 
@@ -82,7 +88,7 @@
         let x = Math.random()*randomVelocity - randomVelocity/2; 
         let y = Math.random()*randomVelocity - randomVelocity/2; 
         let color = colors[Math.floor(Math.random()*colors.length)];
-        this.circles.push(new Circle(radius, spawn.x, spawn.y, x, y, color));
+        this.circles.push(new Circle(this.radius, spawn.x, spawn.y, x, y, color));
       }
     }
 
@@ -138,7 +144,7 @@
     }
   }
 
-  let animation = new MyAnimation(10);
+  let animation = new MyAnimation(20);
   window.addEventListener('resize', resizeCanvas, false);
   function resizeCanvas() {
     canvas.width = window.innerWidth;
