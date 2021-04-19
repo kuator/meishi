@@ -38,8 +38,8 @@
     }
 
     checkCollisions(){
-      for(let i = 0; i<this.number; i++){
-        for(let j = 0; j<this.number; j++){
+      for(let i = 0; i<this.circles.length; i++){
+        for(let j = 0; j<this.circles.length; j++){
           if(this.circles[i].x == this.circles[j].x && this.circles[i].y == this.circles[j].y){
             continue;
           }
@@ -71,9 +71,9 @@
       for(let i = 0; i<this.number; i++){
         let cageHorizontalSize = canvas.width/this.number;
         let cageVerticalSize = canvas.height/this.number ;
-        console.log(cageHorizontalSize);
-        console.log(cageVerticalSize);
-        console.log(this.radius);
+        // console.log(cageHorizontalSize);
+        // console.log(cageVerticalSize);
+        // console.log(this.radius);
         this.radius = Math.min(cageHorizontalSize, cageVerticalSize)/2;
         let radius = this.radius;
         let lowerHorizontalBoundary = radius;
@@ -100,14 +100,14 @@
     }
 
     update(){
-      for(let i = 0; i<this.number; i++){
+      for(let i = 0; i<this.circles.length; i++){
         this.circles[i].update();
       }
     }
 
     render(){
       context.clearRect(0,0, canvas.width, canvas.height);
-      for(let i = 0; i<this.number; i++){
+      for(let i = 0; i<this.circles.length; i++){
         this.circles[i].render();
       }
     }
@@ -144,6 +144,7 @@
     }
   }
 
+
   let animation = new MyAnimation(20);
   window.addEventListener('resize', resizeCanvas, false);
   function resizeCanvas() {
@@ -151,6 +152,23 @@
     canvas.height = window.innerHeight;
     drawStuff();
   }
+
+  document.addEventListener('click', function(event){
+    let mouseX = event.clientX;
+    let mouseY = event.clientY;
+    for(i = animation.circles.length-1;i>=0;i--){
+      circle = animation.circles[i];
+    // for (const circle of animation.circles) {
+      let squaredDistance = Math.pow(circle.x - mouseX, 2)  + Math.pow(circle.y - mouseY, 2);
+      if(squaredDistance <= Math.pow(animation.radius, 2)){
+        console.log(squaredDistance);
+        console.log(animation.radius);
+        // console.log(mouseX, mouseY);
+        // console.log(circle.x, circle.y);
+        animation.circles.splice(i, 1);
+      }
+    }
+  })
 
   function drawStuff(){
     animation.update();
